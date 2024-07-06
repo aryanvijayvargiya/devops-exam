@@ -27,7 +27,7 @@ data "archive_file" "lambda" {
 resource "aws_lambda_function" "lambda" {
   filename      = "lambda_function.zip"
   source_code_hash = data.archive_file.lambda.output_base64sha256
-  function_name = "DevOpsExamLambdaFunction"
+  function_name = "DevOpsLambdaFunction"
   handler       = "lambda_function.lambda_handler"
   role          = data.aws_iam_role.lambda.arn
   runtime       = "python3.8"
