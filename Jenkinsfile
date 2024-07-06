@@ -24,7 +24,7 @@ pipeline{
                 echo "Executing Terraform Apply"
                 sh 'python3 -m pip install --upgrade pip'
                 sh 'python3 -m pip install requests'
-                sh 'terraform state rm aws_lambda_function.lambda'
+                // sh 'terraform state rm aws_lambda_function.lambda'
                 sh 'terraform apply -auto-approve'
             }
         }       
