@@ -1,6 +1,6 @@
 import json
 import boto3
-import requests
+import http.client
 
 def lambda_handler(event, context):
     # Replace with your actual values
@@ -10,6 +10,7 @@ def lambda_handler(event, context):
 
     # URL of the remote API endpoint
     url = "https://bc1yy8dzsg.execute-api.eu-west-1.amazonaws.com/v1/data"
+    conn = http.client.HTTPSConnection(url)
 
     # Headers required by the API
     headers = {
@@ -29,15 +30,17 @@ def lambda_handler(event, context):
 
     # Example of executing the POST request
     try:
-        response = requests.post(url, headers=headers, data=payload_json)
-
+        conn.request("POST", url, json_data, headers)
+        response = conn.getresponse()
+        response_data = response.read().decode('utf-8')
         # Print response to Lambda logs
-        print(response.json())
+        print(response_data)
 
         return {
             'statusCode': response.status_code,
             'body': response.json()
         }
+        conn.close()
     except Exception as e:
         print(f"Error: {e}")
         raise
