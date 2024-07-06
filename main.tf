@@ -23,29 +23,6 @@ data "archive_file" "lambda" {
   output_path = "lambda_function.zip"
 }
 
-resource "aws_security_group" "lambda_sg" {
-  name        = "lambdasecuritygroup"
-  description = "Security group for Lambda function"
-
-  vpc_id = data.aws_vpc.vpc.id 
-  // Allow inbound traffic
-  ingress {
-    description = "Allow HTTP inbound traffic"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  // Allow outbound traffic
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 resource "aws_lambda_function" "lambda" {
   filename      = "lambda_function.zip"
   function_name = "DevOpsExamLambdaFunction"
