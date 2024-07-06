@@ -59,7 +59,7 @@ resource "aws_lambda_function" "lambda" {
     aws_lambda_layer_version.lambda_layer.arn
   ]
   depends_on = [
-    data.archive_file.function_zip,
+    data.archive_file.lambda,
     aws_lambda_layer_version.lambda_layer
   ]
   function_name = "DevOpsExamLambdaFunction"
