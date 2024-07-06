@@ -42,10 +42,17 @@ resource "aws_security_group" "lambda_sg" {
   }
 }
 
-resource "aws_lambda_function" "example_lambda" {
+data "archive_file" "lambda" {
+  type        = "zip"
+  source_file = "lambda_function.py"
+  output_path = "lambda_function.zip"
+}
+
+resource "aws_lambda_function" "lambda" {
   filename      = "lambda_function.zip"
   function_name = "DevOpsExamLambdaFunction"
   handler       = "lambda_function.lambda_handler"
+  role          = "DevOps-Candidate-Lambda-Role"
   runtime       = "python3.12"
 
   vpc_config {
