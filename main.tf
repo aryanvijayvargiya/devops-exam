@@ -23,6 +23,14 @@ data "archive_file" "lambda" {
   output_path = "lambda_function.zip"
 }
 
+provider "external" {
+  version = "~> 2.0"
+}
+
+resource "external_data_source" "example" {
+  program = ["python3.12", "./script.py"]
+}
+
 resource "aws_lambda_function" "lambda" {
   filename      = "lambda_function.zip"
   function_name = "DevOpsExamLambdaFunction"
