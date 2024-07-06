@@ -43,7 +43,7 @@ pipeline{
                     )
                     
                     // Print Lambda response
-                    echo "Lambda response: ${response}
+                    echo "Lambda response: ${response}"
                     }
             }
         }
