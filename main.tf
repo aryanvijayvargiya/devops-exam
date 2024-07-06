@@ -24,7 +24,7 @@ data "archive_file" "lambda" {
   output_path = "lambda_function.zip"
 }
 
-resource "aws_lambda_function" "lambda" {
+resource "aws_lambda_function" "devopslambda" {
   filename      = "lambda_function.zip"
   source_code_hash = data.archive_file.lambda.output_base64sha256
   function_name = "DevOpsLambdaFunction"
