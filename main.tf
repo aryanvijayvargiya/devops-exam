@@ -17,34 +17,6 @@ output "subnet_ids" {
   value = aws_subnet.private_subnets[*].id
 }
 
-resource "null_resource" "install_layer_dependencies" {
-  provisioner "local-exec" {
-    command = "python3 -m pip install -r layer/requirements.txt "
-  }
-  triggers = {
-    trigger = timestamp()
-  }
-}
-
-data "archive_file" "layer_zip" {
-  type        = "zip"
-  source_dir  = "layer"
-  output_path = "layer.zip"
-  depends_on = [
-    null_resource.install_layer_dependencies
-  ]
-}
-
-resource "aws_lambda_layer_version" "lambda_layer" {
-  filename = "layer.zip"
-  source_code_hash = data.archive_file.layer_zip.output_base64sha256
-  layer_name = "devops_exam_layer"
-
-  compatible_runtimes = ["python3.12"]
-  depends_on = [
-    data.archive_file.layer_zip
-  ]
-}
 
 data "archive_file" "lambda" {
   type        = "zip"
@@ -65,7 +37,7 @@ resource "aws_lambda_function" "lambda" {
   function_name = "DevOpsExamLambdaFunction"
   handler       = "lambda_function.lambda_handler"
   role          = data.aws_iam_role.lambda.arn
-  runtime       = "python3.12"
+  runtime       = "python3.8"
 
   vpc_config {
     subnet_ids         = [aws_subnet.private_subnets[0].id]
