@@ -24,7 +24,7 @@ data "archive_file" "lambda" {
 }
 
 resource "aws_security_group" "lambda_sg" {
-  name        = "lambda-security-group"
+  name        = "lambdasecuritygroup"
   description = "Security group for Lambda function"
 
   vpc_id = data.aws_vpc.vpc.id 
