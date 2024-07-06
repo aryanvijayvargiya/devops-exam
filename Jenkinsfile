@@ -22,9 +22,6 @@ pipeline{
         stage("TF Apply"){
             steps{
                 echo "Executing Terraform Apply"
-                sh 'terraform state rm aws_route_table.route_table_private'
-                sh 'terraform state rm aws_route_table_association.route_table_association_private'
-                sh 'terraform state rm aws_security_group.lambda_sg'
                 sh 'terraform apply -auto-approve'
             }
         }       
