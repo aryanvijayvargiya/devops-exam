@@ -17,31 +17,6 @@ output "subnet_ids" {
   value = aws_subnet.private_subnets[*].id
 }
 
-resource "aws_security_group" "lambda_sg" {
-  name        = "lambda-security-group"
-  description = "Security group for Lambda function"
-
-  vpc_id = data.aws_vpc.vpc.id  # Replace with your VPC ID
-
-  // Allow inbound traffic
-  // Example: Allow HTTP traffic
-  ingress {
-    description = "Allow HTTP inbound traffic"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  // Allow outbound traffic
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 data "archive_file" "lambda" {
   type        = "zip"
   source_file = "lambda_function.py"
