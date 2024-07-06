@@ -9,3 +9,10 @@ data "aws_vpc" "vpc" {
 data "aws_iam_role" "lambda" {
   name = "DevOps-Candidate-Lambda-Role"
 }
+
+data "aws_security_group" "sg" {
+  filter {
+    name   = "group-name"
+    values = ["lambda-security-group"]  
+  }
+}
