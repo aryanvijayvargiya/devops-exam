@@ -28,18 +28,12 @@ pipeline{
          stage('Invoke Lambda') {
             steps {
                 echo "Invoking Your Lambda Function"
-                script {
-                    def payload = """
-                        {
+                    def response = sh (
+                        script: "aws lambda invoke --function-name DevOpsExamLambdaFunction --payload '{
                             "subnet_id": "subnet-0009622cf3792440a",
                             "name": "Aryan Vijayvargiya",
                             "email": "aryanvijayvargiya16@gmail.com"
-                        }
-                    """
-                    
-                    // Invoke Lambda function using AWS CLI
-                    def response = sh (
-                        script: "aws lambda invoke --function-name exampleLambdaFunction --payload '${payload}' --log-type Tail response.json",
+                        }' --log-type Tail response.json",
                         returnStdout: true
                     )
                     
