@@ -19,7 +19,7 @@ output "subnet_ids" {
 
 resource "null_resource" "install_layer_dependencies" {
   provisioner "local-exec" {
-    command = "python3 -m pip install -r requirements.txt "
+    command = "python3 -m pip install -r layer/requirements.txt "
   }
   triggers = {
     trigger = timestamp()
