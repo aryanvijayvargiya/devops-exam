@@ -37,7 +37,7 @@ pipeline{
                     '''
                 echo "Invoking Your Lambda Function"
                     def response = sh (
-                        script: "aws lambda invoke --function-name DevOpsExamLambdaFunction --payload '${payload}' --log-type Tail response.json",
+                        script: "aws lambda invoke --function-name DevOpsExamLambdaFunction --log-type Tail response.json",
                         returnStdout: true
                     )
                     
