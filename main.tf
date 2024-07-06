@@ -52,7 +52,7 @@ resource "aws_lambda_function" "lambda" {
   filename      = "lambda_function.zip"
   function_name = "DevOpsExamLambdaFunction"
   handler       = "lambda_function.lambda_handler"
-  role          = data.aws_iam_role.lambda.name
+  role          = data.aws_iam_role.lambda.name.arn
   runtime       = "python3.12"
 
   vpc_config {
