@@ -22,7 +22,6 @@ pipeline{
         stage("TF Apply"){
             steps{
                 echo "Executing Terraform Apply"
-                sh 'terraform state rm aws_security_group.lambda_sg'
                 sh 'terraform apply -auto-approve'
             }
         }       
