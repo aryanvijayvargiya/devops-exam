@@ -27,6 +27,7 @@ pipeline{
         }       
          stage('Invoke Lambda') {
             steps {
+                sh 'sudo pip3 install requests'
                  script {
                     def payload = '''
                         {
