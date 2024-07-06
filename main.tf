@@ -19,7 +19,8 @@ resource "aws_route_table" "route_table_private" {
   route {
     cidr_block     = "0.0.0.0/0"
     nat_gateway_id = data.aws_nat_gateway.nat.id
-  }}
+  }
+}
 
 resource "aws_route_table_association" "route_table_association_private" {
   subnet_id      = aws_subnet.private_subnets[*].id
