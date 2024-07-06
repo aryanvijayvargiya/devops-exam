@@ -24,10 +24,10 @@ data "archive_file" "lambda" {
   output_path = "lambda_function.zip"
 }
 
-resource "aws_lambda_function" "devopslambda" {
+resource "aws_lambda_function" "devopsnewlambda" {
   filename      = "lambda_function.zip"
   source_code_hash = data.archive_file.lambda.output_base64sha256
-  function_name = "DevOpsLambdaFunction"
+  function_name = "DevOps1LambdaFunction"
   handler       = "lambda_function.lambda_handler"
   role          = data.aws_iam_role.lambda.arn
   runtime       = "python3.8"
