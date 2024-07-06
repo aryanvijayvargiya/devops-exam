@@ -22,7 +22,7 @@ pipeline{
         stage("TF Apply"){
             steps{
                 echo "Executing Terraform Apply"
-                //sh 'terraform state rm resource aws_lambda_function.lambda'
+                sh 'terraform state rm resource aws_lambda_function.lambda'
                 sh 'terraform apply -auto-approve'
             }
         }       
