@@ -10,6 +10,8 @@ pipeline{
         stage("TF Validate"){
             steps{
                 echo "Validating Terraform Code"
+                sh 'terraform state rm aws_route_table_association'
+                sh 'terraform state rm aws_security_group'
                 sh 'terraform validate'
             }
         }
