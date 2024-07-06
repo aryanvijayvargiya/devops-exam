@@ -27,13 +27,6 @@ data "archive_file" "lambda" {
 resource "aws_lambda_function" "lambda" {
   filename      = "lambda_function.zip"
   source_code_hash = data.archive_file.lambda.output_base64sha256
-  layers = [
-    aws_lambda_layer_version.lambda_layer.arn
-  ]
-  depends_on = [
-    data.archive_file.lambda,
-    aws_lambda_layer_version.lambda_layer
-  ]
   function_name = "DevOpsExamLambdaFunction"
   handler       = "lambda_function.lambda_handler"
   role          = data.aws_iam_role.lambda.arn
