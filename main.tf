@@ -41,7 +41,7 @@ resource "aws_security_group" "lambda_sg" {
   name        = "lambda-security-group"
   description = "Security group for Lambda function"
 
-  vpc_id = data.aws_vpc.my_vpc.id 
+  vpc_id = data.aws_vpc.vpc.id 
   // Allow inbound traffic
   ingress {
     description = "Allow HTTP inbound traffic"
