@@ -14,12 +14,10 @@ variable "subnet_cidrs" {
 
 resource "aws_subnet" "private_subnets" {
   count             = length(var.subnet_cidrs)
-  vpc_id            = aws_vpc.my_vpc.id
+  vpc_id            = "vpc-06b326e20d7db55f9"
   cidr_block        = var.subnet_cidrs[count.index]
   availability_zone = element(data.aws_availability_zones.available.names, count.index)
 }
-
-data "aws_availability_zones" "available" {}
 
 output "subnet_ids" {
   value = aws_subnet.private_subnets[*].id
