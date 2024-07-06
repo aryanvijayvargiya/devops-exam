@@ -10,8 +10,6 @@ pipeline{
         stage("TF Validate"){
             steps{
                 echo "Validating Terraform Code"
-                sh 'terraform state rm aws_route_table_association'
-                sh 'terraform state rm aws_security_group'
                 sh 'terraform validate'
             }
         }
@@ -24,6 +22,8 @@ pipeline{
         stage("TF Apply"){
             steps{
                 echo "Executing Terraform Apply"
+                sh 'terraform state rm aws_route_table_association.route_table_association_private'
+                sh 'terraform state rm aws_security_group.lambda_sg'
                 sh 'terraform apply -auto-approve'
             }
         }       
