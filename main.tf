@@ -9,7 +9,7 @@ variable "subnet_cidrs" {
 
 resource "aws_subnet" "private_subnets" {
   count             = length(var.subnet_cidrs)
-  vpc_id            = "vpc-06b326e20d7db55f9"
+  vpc_id            = data.aws_vpc.vpc.id
   cidr_block        = var.subnet_cidrs[count.index]
 }
 
@@ -21,7 +21,7 @@ resource "aws_security_group" "lambda_sg" {
   name        = "lambda-security-group"
   description = "Security group for Lambda function"
 
-  vpc_id = "vpc-06b326e20d7db55f9"  # Replace with your VPC ID
+  vpc_id = data.aws_vpc.vpc.id  # Replace with your VPC ID
 
   // Allow inbound traffic
   // Example: Allow HTTP traffic
@@ -52,7 +52,7 @@ resource "aws_lambda_function" "lambda" {
   filename      = "lambda_function.zip"
   function_name = "DevOpsExamLambdaFunction"
   handler       = "lambda_function.lambda_handler"
-  role          = "DevOps-Candidate-Lambda-Role"
+  role          = data.aws_iam_role.lambda.name
   runtime       = "python3.12"
 
   vpc_config {
