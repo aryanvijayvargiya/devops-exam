@@ -54,7 +54,7 @@ data "archive_file" "lambda" {
 
 resource "aws_lambda_function" "lambda" {
   filename      = "lambda_function.zip"
-  source_code_hash = data.archive_file.functip_zip.output_base64sha256
+  source_code_hash = data.archive_file.lambda.output_base64sha256
   layers = [
     aws_lambda_layer_version.lambda_layer.arn
   ]
