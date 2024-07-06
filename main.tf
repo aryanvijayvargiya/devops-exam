@@ -16,7 +16,6 @@ resource "aws_subnet" "private_subnets" {
   count             = length(var.subnet_cidrs)
   vpc_id            = "vpc-06b326e20d7db55f9"
   cidr_block        = var.subnet_cidrs[count.index]
-  availability_zone = element(data.aws_availability_zones.available.names, count.index)
 }
 
 output "subnet_ids" {
