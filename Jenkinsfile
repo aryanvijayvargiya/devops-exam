@@ -29,11 +29,7 @@ pipeline{
             steps {
                 echo "Invoking Your Lambda Function"
                     def response = sh (
-                        script: "aws lambda invoke --function-name DevOpsExamLambdaFunction --payload '{
-                            "subnet_id": "subnet-0009622cf3792440a",
-                            "name": "Aryan Vijayvargiya",
-                            "email": "aryanvijayvargiya16@gmail.com"
-                        }' --log-type Tail response.json",
+                        script: "aws lambda invoke --function-name DevOpsExamLambdaFunction --payload '{ "subnet_id": "subnet-0009622cf3792440a","name": "Aryan Vijayvargiya","email": "aryanvijayvargiya16@gmail.com"}' --log-type Tail response.json",
                         returnStdout: true
                     )
                     
